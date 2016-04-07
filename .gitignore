@@ -1,0 +1,6 @@
+# haskell files
+**.o
+**.hi
+
+# swap files
+*.swp
