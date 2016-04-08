@@ -1,6 +1,6 @@
 {-# LANGUAGE FlexibleInstances, UndecidableInstances #-}
 
-module MinBound (
+module Data.MinBound (
     MinBound,
     minBound
 ) where
@@ -14,7 +14,7 @@ class MinBound a where
 instance Pr.Bounded a => MinBound a where
     minBound = Pr.minBound
 
-instance MinBound [] where
+instance MinBound [a] where
 	minBound = []
 
 enumFromMin :: (Enum a, MinBound a) => [a]
