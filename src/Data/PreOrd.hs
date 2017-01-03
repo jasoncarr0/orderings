@@ -37,8 +37,11 @@ class PreOrd a where
     prCompare :: a -> a -> PreOrdering
 
 -- I have no idea what the issue is with this, but adding it turns PreOrd into ghc-prims Ord
---instance {-# OVERLAPPABLE #-} PO.PartialOrd a => PreOrd a where
---    prCompare a b = embedPartial $ PO.poCompare a b
+instance {-# OVERLAPPABLE #-} PO.PartialOrd a => PreOrd a where
+    prCompare a b = embedPartial $ PO.poCompare a b
+-- Bogus instance to fix typechecker bug
+instance PreOrd () where
+    prCompare () () = EQ
 
 (<) :: PreOrd a => a -> a -> Bool
 a < b = prCompare a b == LT
