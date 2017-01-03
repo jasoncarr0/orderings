@@ -3,11 +3,10 @@
 
 module Data.PartialOrd (
     PartialOrd,
-    PartialOrdering (LT, EQ, IC, GT),
+    PartialOrdering (..)
 ) where
 
 import Data.Data
-import Data.Ix
 import GHC.Generics
 import Prelude hiding (Ord, compare, Ordering)
 import qualified Prelude as Pr (Ord, compare, Ordering (LT, EQ, GT))
