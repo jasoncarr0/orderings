@@ -2,13 +2,13 @@
 {-# LANGUAGE DeriveDataTypeable, DeriveGeneric #-}
 
 module Data.PartialOrd (
-    PartialOrd,
+    PartialOrd (..),
     PartialOrdering (..)
 ) where
 
 import Data.Data
 import GHC.Generics
-import Prelude hiding (Ord, compare, Ordering (LT, EQ, GT))
+import Prelude hiding (Ord, compare, (<=), Ordering (LT, EQ, GT))
 import qualified Prelude as Pr (Ord, compare, Ordering (LT, EQ, GT))
 
 -- | PartialOrdering defines a set of possible relations between two values.
@@ -23,9 +23,9 @@ embedOrdering Pr.LT = LT
 embedOrdering Pr.EQ = EQ
 embedOrdering Pr.GT = GT
 
-
 class PartialOrd a where
     poCompare :: a -> a -> PartialOrdering
 
 instance {-# OVERLAPPABLE #-} Pr.Ord a => PartialOrd a where
     poCompare a b = embedOrdering $ Pr.compare a b
+
