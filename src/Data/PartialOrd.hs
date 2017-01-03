@@ -29,11 +29,3 @@ class PartialOrd a where
 
 instance {-# OVERLAPPABLE #-} Pr.Ord a => PartialOrd a where
     poCompare a b = embedOrdering $ Pr.compare a b
- 
-instance PartialOrd PartialOrdering where
-    poCompare LT LT = EQ
-    poCompare LT _ = LT
-    poCompare _ LT = GT
-    poCompare GT GT = EQ
-    poCompare _ _ = IC
-
