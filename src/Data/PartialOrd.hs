@@ -8,7 +8,7 @@ module Data.PartialOrd (
 
 import Data.Data
 import GHC.Generics
-import Prelude hiding (Ord, compare, Ordering)
+import Prelude hiding (Ord, compare, Ordering (LT, EQ, GT))
 import qualified Prelude as Pr (Ord, compare, Ordering (LT, EQ, GT))
 
 -- | PartialOrdering defines a set of possible relations between two values.
@@ -19,9 +19,9 @@ data PartialOrdering = LT | EQ | IC | GT
     deriving (Bounded, Enum, Eq, Data, Read, Show, Generic)
 
 embedOrdering :: Pr.Ordering -> PartialOrdering
-embedOrdering Pr.LT = Data.PartialOrd.LT
-embedOrdering Pr.EQ = Data.PartialOrd.EQ
-embedOrdering Pr.GT = Data.PartialOrd.GT
+embedOrdering Pr.LT = LT
+embedOrdering Pr.EQ = EQ
+embedOrdering Pr.GT = GT
 
 
 class PartialOrd a where
