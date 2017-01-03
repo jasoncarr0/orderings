@@ -16,7 +16,7 @@ build-type:          Simple
 cabal-version:       >=1.10
 
 library
-  exposed-modules:     Data.PartialOrd, Data.MinBound
+  exposed-modules:     Data.PartialOrd, Data.PreOrd, Data.MinBound
   -- other-modules:       
   -- other-extensions:    
   build-depends:       base >=4.9 && <5
