@@ -36,8 +36,9 @@ embedPartial PO.GT = GT
 class PreOrd a where
     prCompare :: a -> a -> PreOrdering
 
-instance {-# OVERLAPPABLE #-} PO.PartialOrd a => PreOrd a where
-    prCompare a b = embedPartial $ PO.poCompare a b
+-- I have no idea what the issue is with this, but adding it turns PreOrd into ghc-prims Ord
+--instance {-# OVERLAPPABLE #-} PO.PartialOrd a => PreOrd a where
+--    prCompare a b = embedPartial $ PO.poCompare a b
 
 (<) :: PreOrd a => a -> a -> Bool
 a < b = prCompare a b == LT
