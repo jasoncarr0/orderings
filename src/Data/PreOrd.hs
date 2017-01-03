@@ -3,13 +3,20 @@
 
 module Data.PreOrd (
     PreOrd (..),
-    PreOrdering (..)
+    PreOrdering (..),
+    (<),
+    (>),
+    (<=),
+    (>=),
+    (<~),
+    (>~),
+    (~~),
 ) where
 
 import Data.Data
 import GHC.Generics
-import Prelude hiding (Ord, compare, Ordering (LT, EQ, GT))
-import qualified Prelude as Pr (Ord, compare, Ordering (LT, EQ, GT))
+--import Prelude hiding (Ord, compare, Ordering (LT, EQ, GT), (<), (>), (<=), (>=))
+import Prelude (Bool, Show, Eq, Read, Bounded, Enum, (==), (||), ($))
 import qualified Data.PartialOrd as PO
 
 -- | PreOrdering defines a set of possible preorder relations between two values
@@ -31,3 +38,24 @@ class PreOrd a where
 
 instance {-# OVERLAPPABLE #-} PO.PartialOrd a => PreOrd a where
     prCompare a b = embedPartial $ PO.poCompare a b
+
+(<) :: PreOrd a => a -> a -> Bool
+a < b = prCompare a b == LT
+
+(>) :: PreOrd a => a -> a -> Bool
+a > b = prCompare a b == GT
+
+(<=) :: PreOrd a => a -> a -> Bool
+a <= b = let comp = prCompare a b in (comp == LT) || (comp == EQ) 
+
+(>=) :: PreOrd a => a -> a -> Bool
+a >= b = let comp = prCompare a b in (comp == GT) || (comp == EQ) 
+
+(<~) :: PreOrd a => a -> a -> Bool
+a <~ b = let comp = prCompare a b in (comp == LT) || (comp == EQ) || (comp == LG) 
+
+(>~) :: PreOrd a => a -> a -> Bool
+a >~ b = let comp = prCompare a b in (comp == GT) || (comp == EQ) || (comp == LG) 
+
+(~~) :: PreOrd a => a -> a -> Bool
+a ~~ b = prCompare a b == LG
