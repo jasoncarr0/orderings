@@ -25,15 +25,15 @@ embedOrdering Pr.GT = GT
 
 
 class PartialOrd a where
-    pCompare :: a -> a -> PartialOrdering
+    poCompare :: a -> a -> PartialOrdering
 
 instance {-# OVERLAPPABLE #-} Pr.Ord a => PartialOrd a where
-    pCompare a b = embedOrdering $ Pr.compare a b
+    poCompare a b = embedOrdering $ Pr.compare a b
  
 instance PartialOrd PartialOrdering where
-    pCompare Data.PartialOrd.LT Data.PartialOrd.LT = Data.PartialOrd.EQ
-    pCompare Data.PartialOrd.LT _ = Data.PartialOrd.LT
-    pCompare _ Data.PartialOrd.LT = Data.PartialOrd.GT
-    pCompare Data.PartialOrd.GT Data.PartialOrd.GT = Data.PartialOrd.EQ
-    pCompare _ _ = IC
+    poCompare Data.PartialOrd.LT Data.PartialOrd.LT = Data.PartialOrd.EQ
+    poCompare Data.PartialOrd.LT _ = Data.PartialOrd.LT
+    poCompare _ Data.PartialOrd.LT = Data.PartialOrd.GT
+    poCompare Data.PartialOrd.GT Data.PartialOrd.GT = Data.PartialOrd.EQ
+    poCompare _ _ = IC
 
