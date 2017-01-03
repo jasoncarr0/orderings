@@ -31,9 +31,9 @@ instance {-# OVERLAPPABLE #-} Pr.Ord a => PartialOrd a where
     poCompare a b = embedOrdering $ Pr.compare a b
  
 instance PartialOrd PartialOrdering where
-    poCompare Data.PartialOrd.LT Data.PartialOrd.LT = Data.PartialOrd.EQ
-    poCompare Data.PartialOrd.LT _ = Data.PartialOrd.LT
-    poCompare _ Data.PartialOrd.LT = Data.PartialOrd.GT
-    poCompare Data.PartialOrd.GT Data.PartialOrd.GT = Data.PartialOrd.EQ
+    poCompare LT LT = EQ
+    poCompare LT _ = LT
+    poCompare _ LT = GT
+    poCompare GT GT = EQ
     poCompare _ _ = IC
 
