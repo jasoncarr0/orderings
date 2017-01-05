@@ -2,7 +2,8 @@
 
 module Data.MinBound (
     MinBound,
-    minBound
+    minBound,
+    enumFromMin
 ) where
 
 import Prelude hiding (Bounded, minBound)
@@ -10,7 +11,7 @@ import qualified Prelude as Pr (Bounded, minBound)
 
 -- | MinBound defines a minimum bounded element to the set
 -- Whenever there is also an instance for some ordering, it should be true
--- That no element of a is less than minBound :: a
+-- that no element of a is less than minBound :: a
 class MinBound a where 
     minBound :: a
 
